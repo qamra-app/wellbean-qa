@@ -6,9 +6,7 @@ import { motion, useInView } from 'framer-motion'
 import { fadeUp, staggerContainer, scaleIn } from '@/lib/animations'
 
 const hoursData = [
-  { day: 'Monday – Friday', time: '—' },
-  { day: 'Saturday', time: '—' },
-  { day: 'Sunday', time: '—' },
+  { day: 'Sun – Thu', time: '—' },
 ]
 
 const tags = ['Specialty Coffee', 'Opening Soon', 'Qatar']
