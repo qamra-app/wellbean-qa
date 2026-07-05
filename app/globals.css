@@ -28,3 +28,8 @@ body {
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: #FAFAF9; }
 ::-webkit-scrollbar-thumb { background: #1C0A02; border-radius: 2px; }
+
+/* Custom easing for all transitions */
+* {
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}

@@ -32,7 +32,7 @@ export default function Hero() {
       {/* Background image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="https://picsum.photos/seed/coffeehero/1920/1080"
+          src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=1920&q=80"
           alt="Coffee"
           fill
           unoptimized

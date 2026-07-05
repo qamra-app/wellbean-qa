@@ -37,7 +37,7 @@ export default function Hours() {
         transition={{ duration: 0.5, ease: 'easeOut' }}
       >
         <span className="font-sans text-xs uppercase tracking-[0.2em] text-charcoal/30 whitespace-nowrap">
-          03 / Visit
+          Visit
         </span>
         <div className="flex-1 h-px bg-charcoal/10" />
       </motion.div>
@@ -128,7 +128,7 @@ export default function Hours() {
           className="relative rounded-3xl overflow-hidden aspect-[4/5]"
         >
           <Image
-            src="https://picsum.photos/seed/doha-cafe/800/1000"
+            src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80"
             alt="WellBean café in Doha"
             fill
             className="object-cover"

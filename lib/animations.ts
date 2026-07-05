@@ -1,9 +1,11 @@
 import { Variants } from 'framer-motion'
 
 export const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 32, filter: 'blur(8px)' },
   visible: {
-    opacity: 1, y: 0,
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
     transition: { type: 'spring', stiffness: 120, damping: 20, mass: 0.8 },
   },
 }
@@ -16,9 +18,11 @@ export const staggerContainer: Variants = {
 }
 
 export const slideInLeft: Variants = {
-  hidden: { opacity: 0, x: -40 },
+  hidden: { opacity: 0, x: -40, filter: 'blur(6px)' },
   visible: {
-    opacity: 1, x: 0,
+    opacity: 1,
+    x: 0,
+    filter: 'blur(0px)',
     transition: { type: 'spring', stiffness: 120, damping: 20 },
   },
 }

@@ -67,7 +67,7 @@ export default function Contact() {
         transition={{ duration: 0.5, ease: 'easeOut' }}
       >
         <span className="font-sans text-xs uppercase tracking-[0.2em] text-charcoal/30 whitespace-nowrap">
-          04 / Contact
+          Contact
         </span>
         <div className="flex-1 h-px bg-charcoal/10" />
       </motion.div>

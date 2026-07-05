@@ -40,7 +40,7 @@ export default function About() {
         {/* Section header */}
         <div className="flex items-center gap-6 mb-20">
           <span className="font-sans text-xs uppercase tracking-[0.2em] text-charcoal/30">
-            02 / About
+            About
           </span>
           <div className="flex-1 h-px bg-charcoal/10" />
         </div>
@@ -109,7 +109,7 @@ export default function About() {
           >
             <div className="relative aspect-[3/4] rounded-2xl overflow-hidden">
               <Image
-                src="https://picsum.photos/seed/coffeebeans/800/1000"
+                src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800&q=80"
                 alt="Coffee beans"
                 fill
                 unoptimized

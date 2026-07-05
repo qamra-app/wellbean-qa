@@ -58,7 +58,7 @@ export default function Nav() {
               <a
                 key={link}
                 href={`#${link.toLowerCase()}`}
-                className={`relative font-sans text-sm font-medium transition-colors duration-200 pb-0.5
+                className={`relative font-sans text-sm font-medium transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] pb-0.5
                   after:absolute after:bottom-0 after:left-0 after:h-px after:w-0
                   hover:after:w-full after:transition-all after:duration-300
                   ${
@@ -119,7 +119,7 @@ export default function Nav() {
                   href={`#${link.toLowerCase()}`}
                   variants={fadeUp}
                   onClick={() => setMenuOpen(false)}
-                  className="font-display text-3xl font-bold text-espresso hover:text-brown transition-colors duration-200"
+                  className="font-display text-3xl font-bold text-espresso hover:text-brown transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
                 >
                   {link}
                 </motion.a>
