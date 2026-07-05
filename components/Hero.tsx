@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import Image from 'next/image'
 import { ArrowRight } from '@phosphor-icons/react'
@@ -101,25 +102,47 @@ export default function Hero() {
     mouseY.set(0)
   }
 
-  function handleTouchMove(e: React.TouchEvent<HTMLElement>) {
-    const touch = e.touches[0]
-    const rect = e.currentTarget.getBoundingClientRect()
-    mouseX.set((touch.clientX - rect.left) / rect.width - 0.5)
-    mouseY.set((touch.clientY - rect.top) / rect.height - 0.5)
-  }
+  // Gyroscope parallax for mobile — tilt phone to shift the coffee bean background
+  useEffect(() => {
+    const isMobile = window.matchMedia('(pointer: coarse)').matches
+    if (!isMobile) return
 
-  function handleTouchEnd() {
-    mouseX.set(0)
-    mouseY.set(0)
-  }
+    function handleOrientation(e: DeviceOrientationEvent) {
+      const x = Math.max(-0.5, Math.min(0.5, (e.gamma ?? 0) / 60))
+      const y = Math.max(-0.5, Math.min(0.5, ((e.beta ?? 45) - 45) / 60))
+      mouseX.set(x)
+      mouseY.set(y)
+    }
+
+    // iOS 13+ requires a user-gesture permission request
+    if (
+      typeof DeviceOrientationEvent !== 'undefined' &&
+      typeof (DeviceOrientationEvent as unknown as { requestPermission?: () => Promise<string> }).requestPermission === 'function'
+    ) {
+      const requestOnTouch = () => {
+        ;(DeviceOrientationEvent as unknown as { requestPermission: () => Promise<string> })
+          .requestPermission()
+          .then((result) => {
+            if (result === 'granted') {
+              window.addEventListener('deviceorientation', handleOrientation)
+            }
+          })
+          .catch(() => {})
+      }
+      window.addEventListener('touchstart', requestOnTouch, { once: true })
+      return () => window.removeEventListener('touchstart', requestOnTouch)
+    } else {
+      // Android + other browsers — no permission needed
+      window.addEventListener('deviceorientation', handleOrientation)
+      return () => window.removeEventListener('deviceorientation', handleOrientation)
+    }
+  }, [mouseX, mouseY])
 
   return (
     <motion.section
       className="relative min-h-[100dvh] overflow-hidden bg-espresso flex flex-col"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
     >
       {/* Background image — moves the most (far layer) */}
       <motion.div
