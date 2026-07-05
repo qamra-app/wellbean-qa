@@ -101,11 +101,25 @@ export default function Hero() {
     mouseY.set(0)
   }
 
+  function handleTouchMove(e: React.TouchEvent<HTMLElement>) {
+    const touch = e.touches[0]
+    const rect = e.currentTarget.getBoundingClientRect()
+    mouseX.set((touch.clientX - rect.left) / rect.width - 0.5)
+    mouseY.set((touch.clientY - rect.top) / rect.height - 0.5)
+  }
+
+  function handleTouchEnd() {
+    mouseX.set(0)
+    mouseY.set(0)
+  }
+
   return (
     <motion.section
       className="relative min-h-[100dvh] overflow-hidden bg-espresso flex flex-col"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
     >
       {/* Background image — moves the most (far layer) */}
       <motion.div

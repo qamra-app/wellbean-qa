@@ -3,6 +3,7 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { InstagramLogo, WhatsappLogo } from '@phosphor-icons/react'
+import Image from 'next/image'
 import { fadeUp, staggerContainer } from '@/lib/animations'
 
 const navLinks = ['About', 'Visit', 'Contact']
@@ -23,7 +24,18 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Col 1 — Brand */}
           <motion.div variants={fadeUp}>
-            <p className="font-display font-bold text-3xl text-cream">WellBean</p>
+            <div className="flex items-center gap-3 mb-1">
+              <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
+                <Image
+                  src="/wellbean-logo.jpg"
+                  alt="WellBean"
+                  width={40}
+                  height={40}
+                  className="object-cover w-full h-full"
+                />
+              </div>
+              <p className="font-display font-bold text-3xl text-cream">WellBean</p>
+            </div>
             <p className="font-sans text-sm text-cream/40 mt-1">Specialty Coffee</p>
             <p className="font-sans text-cream/30 text-sm mt-6 max-w-[24ch] leading-relaxed italic">
               &ldquo;Your daily dose of well-bean-ing.&rdquo;
@@ -81,7 +93,7 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-6 flex flex-col md:flex-row justify-between items-center gap-3">
         <p className="font-sans text-xs text-cream/25">
-          © 2025 WellBean. All rights reserved.
+          © 2026 WellBean. All rights reserved.
         </p>
         <p className="font-sans text-xs text-cream/25">Doha, State of Qatar</p>
       </div>

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion'
 import { List, X } from '@phosphor-icons/react'
+import Image from 'next/image'
 import { staggerContainer, fadeUp } from '@/lib/animations'
 
 const links = ['About', 'Visit', 'Contact']
@@ -41,8 +42,18 @@ export default function Nav() {
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12 h-16 flex items-center justify-between">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2">
-            <span className="text-brown text-xs leading-none">●</span>
+          <a href="#" className="flex items-center gap-2.5">
+            <div className={`w-7 h-7 rounded-full overflow-hidden flex-shrink-0 transition-all duration-300 ${
+              scrolled ? '' : 'ring-1 ring-cream/20'
+            }`}>
+              <Image
+                src="/wellbean-logo.jpg"
+                alt="WellBean"
+                width={28}
+                height={28}
+                className="object-cover w-full h-full"
+              />
+            </div>
             <span
               className={`font-display font-bold text-lg tracking-tight transition-colors duration-300 ${
                 scrolled ? 'text-espresso' : 'text-cream'
