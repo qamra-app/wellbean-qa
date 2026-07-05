@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import Image from 'next/image'
 import { ArrowRight } from '@phosphor-icons/react'
 import { staggerContainer, fadeUp } from '@/lib/animations'
@@ -72,10 +72,46 @@ const stats = [
 ]
 
 export default function Hero() {
+  // Mouse parallax setup
+  const mouseX = useMotionValue(0)
+  const mouseY = useMotionValue(0)
+
+  const springConfig = { stiffness: 40, damping: 25, mass: 1 }
+  const smoothMouseX = useSpring(mouseX, springConfig)
+  const smoothMouseY = useSpring(mouseY, springConfig)
+
+  // Different depth layers
+  const bgX = useTransform(smoothMouseX, [-0.5, 0.5], ['3%', '-3%'])
+  const bgY = useTransform(smoothMouseY, [-0.5, 0.5], ['3%', '-3%'])
+
+  const logoX = useTransform(smoothMouseX, [-0.5, 0.5], ['-12px', '12px'])
+  const logoY = useTransform(smoothMouseY, [-0.5, 0.5], ['-10px', '10px'])
+
+  const textX = useTransform(smoothMouseX, [-0.5, 0.5], ['-4px', '4px'])
+  const textY = useTransform(smoothMouseY, [-0.5, 0.5], ['-3px', '3px'])
+
+  function handleMouseMove(e: React.MouseEvent<HTMLElement>) {
+    const rect = e.currentTarget.getBoundingClientRect()
+    mouseX.set((e.clientX - rect.left) / rect.width - 0.5)
+    mouseY.set((e.clientY - rect.top) / rect.height - 0.5)
+  }
+
+  function handleMouseLeave() {
+    mouseX.set(0)
+    mouseY.set(0)
+  }
+
   return (
-    <section className="relative min-h-[100dvh] overflow-hidden bg-espresso flex flex-col">
-      {/* Background image */}
-      <div className="absolute inset-0 z-0">
+    <motion.section
+      className="relative min-h-[100dvh] overflow-hidden bg-espresso flex flex-col"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
+      {/* Background image — moves the most (far layer) */}
+      <motion.div
+        className="absolute inset-0 z-0 scale-110"
+        style={{ x: bgX, y: bgY }}
+      >
         <Image
           src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=1920&q=80"
           alt="Coffee"
@@ -83,14 +119,23 @@ export default function Hero() {
           unoptimized
           className="object-cover opacity-30 mix-blend-luminosity"
         />
-      </div>
+      </motion.div>
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-[100dvh] text-center px-6 w-full">
-        <div className="hidden md:block">
+        {/* Steam effect — medium depth layer */}
+        <motion.div
+          className="hidden md:block"
+          style={{ x: logoX, y: logoY }}
+        >
           <SteamEffect />
-        </div>
-        <div className="max-w-5xl mx-auto w-full flex flex-col items-center">
+        </motion.div>
+
+        {/* Text content — moves the least (close layer) */}
+        <motion.div
+          className="max-w-5xl mx-auto w-full flex flex-col items-center"
+          style={{ x: textX, y: textY }}
+        >
           {/* Eyebrow tag */}
           <motion.div
             variants={fadeUp}
@@ -156,7 +201,7 @@ export default function Hero() {
               @wellbean.qa
             </motion.span>
           </motion.div>
-        </div>
+        </motion.div>
       </div>
 
       {/* Bottom stat strip */}
@@ -172,6 +217,6 @@ export default function Hero() {
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   )
 }

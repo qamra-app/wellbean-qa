@@ -34,7 +34,7 @@ export default function About() {
     <section
       id="about"
       ref={sectionRef}
-      className="bg-warm-white py-24 md:py-32"
+      className="bg-sand py-24 md:py-32"
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         {/* Section header */}

@@ -57,7 +57,7 @@ export default function Contact() {
   return (
     <section
       ref={sectionRef}
-      className="bg-warm-white py-24 md:py-32 px-6 md:px-12"
+      className="bg-clay py-24 md:py-32 px-6 md:px-12"
     >
       {/* Section header */}
       <motion.div
