@@ -72,11 +72,16 @@ export default function Hours() {
             </div>
           </div>
 
+          {/* One-liner */}
+          <motion.p variants={fadeUp} className="mt-6 font-sans text-base leading-[1.8] text-charcoal/55 max-w-[36ch]">
+            A quiet corner for the unhurried cup — coming soon to Doha.
+          </motion.p>
+
           {/* Address block */}
-          <motion.div variants={fadeUp} className="mt-8 space-y-2">
-            <p className="font-sans text-base text-charcoal/60">Doha, State of Qatar</p>
-            <p className="font-sans text-base text-charcoal/60">@wellbean.qa</p>
-            <p className="font-sans text-base text-charcoal/60">wellbean.qa</p>
+          <motion.div variants={fadeUp} className="mt-8 space-y-1">
+            <p className="font-sans text-sm text-charcoal/50">Doha, State of Qatar</p>
+            <p className="font-sans text-sm text-charcoal/50">@wellbean.qa</p>
+            <p className="font-sans text-sm text-charcoal/50">wellbean.qa</p>
           </motion.div>
 
           {/* Opening badge */}

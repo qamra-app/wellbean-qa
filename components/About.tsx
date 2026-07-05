@@ -83,13 +83,14 @@ export default function About() {
             </p>
 
             {/* Stats row */}
-            <div className="mt-12 grid grid-cols-2 gap-6 border-t border-charcoal/10 pt-8">
+            <div className="mt-12 grid grid-cols-3 gap-6 border-t border-charcoal/10 pt-8">
               {[
-                { number: '2025', label: 'Founded' },
-                { number: 'Qatar', label: 'Home' },
+                { number: '2026', label: 'Founded' },
+                { number: '87+', label: 'Cup Score' },
+                { number: 'QA', label: 'Home' },
               ].map((stat) => (
                 <div key={stat.label}>
-                  <p className="font-display font-bold text-2xl text-espresso">
+                  <p className="font-display font-bold text-4xl text-espresso">
                     {stat.number}
                   </p>
                   <p className="font-sans text-xs text-charcoal/40 uppercase tracking-wider mt-1">
@@ -113,7 +114,7 @@ export default function About() {
                 alt="Coffee beans"
                 fill
                 unoptimized
-                className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                className="object-cover transition-all duration-700"
               />
             </div>
             <div className="mt-4 flex items-center justify-between">
