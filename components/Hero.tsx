@@ -5,6 +5,51 @@ import Image from 'next/image'
 import { ArrowRight } from '@phosphor-icons/react'
 import { staggerContainer, fadeUp } from '@/lib/animations'
 
+function SteamEffect() {
+  return (
+    <div
+      className="pointer-events-none absolute"
+      style={{
+        bottom: '52%',
+        right: 'calc(20% - 60px)',
+        width: 120,
+        height: 160,
+      }}
+      aria-hidden="true"
+    >
+      <svg
+        width="120"
+        height="160"
+        viewBox="0 0 120 160"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        {/* Wisp 1 — left strand */}
+        <path
+          className="steam-wisp"
+          d="M25 155 C15 135 35 120 20 100 C5 80 25 65 18 45"
+        />
+        {/* Wisp 2 — center-left strand */}
+        <path
+          className="steam-wisp"
+          d="M50 155 C60 132 38 118 52 96 C66 74 44 60 55 38"
+        />
+        {/* Wisp 3 — center-right strand */}
+        <path
+          className="steam-wisp"
+          d="M75 155 C65 130 85 115 70 93 C55 71 75 56 65 34"
+        />
+        {/* Wisp 4 — right strand, thinner */}
+        <path
+          className="steam-wisp"
+          style={{ strokeWidth: 1.5, stroke: 'rgba(255,248,240,0.2)' }}
+          d="M100 155 C110 133 92 118 105 96 C118 74 100 59 108 37"
+        />
+      </svg>
+    </div>
+  )
+}
+
 const words = ['Well', 'Bean.']
 
 const wordReveal = {
@@ -42,6 +87,9 @@ export default function Hero() {
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-[100dvh] text-center px-6 w-full">
+        <div className="hidden md:block">
+          <SteamEffect />
+        </div>
         <div className="max-w-5xl mx-auto w-full flex flex-col items-center">
           {/* Eyebrow tag */}
           <motion.div

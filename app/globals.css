@@ -33,3 +33,38 @@ body {
 * {
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+/* Coffee steam animation */
+@keyframes steamRise {
+  0% {
+    opacity: 0;
+    transform: translateY(0) translateX(0) scaleX(1);
+  }
+  10% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-140px) translateX(6px) scaleX(1.4);
+  }
+}
+
+.steam-wisp {
+  fill: none;
+  stroke: rgba(255, 248, 240, 0.35);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  animation: steamRise 3.5s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+.steam-wisp:nth-child(1) { animation-delay: 0s; animation-duration: 3.2s; }
+.steam-wisp:nth-child(2) { animation-delay: 0.8s; animation-duration: 3.8s; }
+.steam-wisp:nth-child(3) { animation-delay: 1.6s; animation-duration: 3.5s; }
+.steam-wisp:nth-child(4) { animation-delay: 2.4s; animation-duration: 4s; }
