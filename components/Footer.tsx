@@ -1,2 +1,90 @@
 'use client'
-export default function Footer() { return <footer /> }
+
+import { useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
+import { InstagramLogo, WhatsappLogo } from '@phosphor-icons/react'
+import { fadeUp, staggerContainer } from '@/lib/animations'
+
+const navLinks = ['About', 'Visit', 'Contact']
+
+export default function Footer() {
+  const ref = useRef<HTMLElement>(null)
+  const inView = useInView(ref, { once: true, margin: '-60px' })
+
+  return (
+    <footer ref={ref} className="bg-espresso text-cream">
+      {/* Top section */}
+      <motion.div
+        variants={staggerContainer}
+        initial="hidden"
+        animate={inView ? 'visible' : 'hidden'}
+        className="max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-20"
+      >
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          {/* Col 1 — Brand */}
+          <motion.div variants={fadeUp}>
+            <p className="font-display font-bold text-3xl text-cream">WellBean</p>
+            <p className="font-sans text-sm text-cream/40 mt-1">Specialty Coffee</p>
+            <p className="font-sans text-cream/30 text-sm mt-6 max-w-[24ch] leading-relaxed italic">
+              &ldquo;Your daily dose of well-bean-ing.&rdquo;
+            </p>
+          </motion.div>
+
+          {/* Col 2 — Navigate */}
+          <motion.div variants={fadeUp}>
+            <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-cream/30 mb-4">
+              Navigate
+            </p>
+            <nav className="flex flex-col">
+              {navLinks.map((link) => (
+                <a
+                  key={link}
+                  href={`#${link.toLowerCase()}`}
+                  className="block font-sans text-sm text-cream/60 hover:text-cream transition-colors py-1"
+                >
+                  {link}
+                </a>
+              ))}
+            </nav>
+          </motion.div>
+
+          {/* Col 3 — Connect */}
+          <motion.div variants={fadeUp}>
+            <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-cream/30 mb-4">
+              Connect
+            </p>
+            <div className="flex flex-col">
+              <a
+                href="https://instagram.com/wellbean.qa"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 font-sans text-sm text-cream/60 hover:text-cream transition-colors py-1"
+              >
+                <InstagramLogo size={18} />
+                @wellbean.qa
+              </a>
+              <a
+                href="#"
+                className="flex items-center gap-3 font-sans text-sm text-cream/60 hover:text-cream transition-colors py-1"
+              >
+                <WhatsappLogo size={18} />
+                Chat with us
+              </a>
+            </div>
+          </motion.div>
+        </div>
+      </motion.div>
+
+      {/* Divider */}
+      <div className="border-t border-cream/10 max-w-7xl mx-auto px-6 md:px-12" />
+
+      {/* Bottom bar */}
+      <div className="max-w-7xl mx-auto px-6 md:px-12 py-6 flex flex-col md:flex-row justify-between items-center gap-3">
+        <p className="font-sans text-xs text-cream/25">
+          © 2025 WellBean. All rights reserved.
+        </p>
+        <p className="font-sans text-xs text-cream/25">Doha, State of Qatar</p>
+      </div>
+    </footer>
+  )
+}
