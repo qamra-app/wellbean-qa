@@ -117,9 +117,14 @@ export default function Hero() {
           alt="Coffee"
           fill
           unoptimized
-          className="object-cover opacity-30 mix-blend-luminosity"
+          className="object-cover opacity-30"
         />
       </motion.div>
+
+      {/* Radial gradient — darkens edges, protects text contrast in center */}
+      <div className="absolute inset-0 z-[1] pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse 70% 60% at 50% 50%, rgba(28,10,2,0.35) 0%, rgba(28,10,2,0.80) 100%)' }}
+      />
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-[100dvh] text-center px-6 w-full">
@@ -144,7 +149,7 @@ export default function Hero() {
             className="inline-flex items-center gap-2 rounded-full border border-cream/20 px-4 py-1.5 mb-8"
           >
             <span className="animate-pulse w-1.5 h-1.5 rounded-full bg-brown block" />
-            <span className="font-sans text-[11px] uppercase tracking-[0.2em] text-cream/60">
+            <span className="font-sans text-[11px] uppercase tracking-[0.2em] text-white/75">
               Specialty Coffee · Opening Soon in Qatar
             </span>
           </motion.div>
@@ -158,7 +163,7 @@ export default function Hero() {
                   variants={wordReveal}
                   initial="hidden"
                   animate="visible"
-                  className="font-display font-bold text-cream leading-[0.9] tracking-tight"
+                  className="font-display font-bold text-white leading-[0.9] tracking-tight"
                   style={{ fontSize: 'clamp(4rem, 14vw, 12rem)' }}
                 >
                   {word}
@@ -173,7 +178,7 @@ export default function Hero() {
             initial="hidden"
             animate="visible"
             transition={{ delay: 0.75 }}
-            className="font-sans text-cream/60 text-lg md:text-xl font-light tracking-wide mt-8"
+            className="font-sans text-white/80 text-lg md:text-xl font-light tracking-wide mt-8"
           >
             Your daily dose of well-bean-ing
           </motion.p>
@@ -196,7 +201,7 @@ export default function Hero() {
             </motion.a>
             <motion.span
               variants={fadeUp}
-              className="font-sans text-sm text-cream/40 hover:text-cream/70 transition-colors cursor-pointer"
+              className="font-sans text-sm text-white/60 hover:text-white transition-colors cursor-pointer"
             >
               @wellbean.qa
             </motion.span>
@@ -209,10 +214,10 @@ export default function Hero() {
         <div className="grid grid-cols-3 divide-x divide-cream/10">
           {stats.map((stat) => (
             <div key={stat.label} className="py-5 px-8 flex flex-col gap-1">
-              <span className="font-display font-semibold text-cream text-sm">
+              <span className="font-display font-semibold text-white text-sm">
                 {stat.label}
               </span>
-              <span className="font-sans text-cream/40 text-xs">{stat.value}</span>
+              <span className="font-sans text-white/65 text-xs">{stat.value}</span>
             </div>
           ))}
         </div>
