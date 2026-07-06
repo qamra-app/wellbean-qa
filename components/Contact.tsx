@@ -46,9 +46,9 @@ export default function Contact() {
   const leftRef = useRef<HTMLDivElement>(null)
   const rightRef = useRef<HTMLDivElement>(null)
 
-  const sectionInView = useInView(sectionRef, { once: true, margin: '-60px' })
-  const leftInView = useInView(leftRef, { once: true, margin: '-60px' })
-  const rightInView = useInView(rightRef, { once: true, margin: '-60px' })
+  const sectionInView = useInView(sectionRef, { once: false, margin: '-60px' })
+  const leftInView = useInView(leftRef, { once: false, margin: '-60px' })
+  const rightInView = useInView(rightRef, { once: false, margin: '-60px' })
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()

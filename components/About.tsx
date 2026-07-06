@@ -30,7 +30,7 @@ function Counter({ target, suffix = '' }: { target: number; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null)
   const count = useMotionValue(0)
   const rounded = useTransform(count, (v: number) => Math.floor(v))
-  const inView = useInView(ref, { once: true, margin: '-40px' })
+  const inView = useInView(ref, { once: false, margin: '-40px' })
 
   useEffect(() => {
     if (!inView) return
@@ -54,10 +54,10 @@ export default function About() {
   const rightRef = useRef<HTMLDivElement>(null)
   const statsRef = useRef<HTMLDivElement>(null)
 
-  const leftInView = useInView(leftRef, { once: true, margin: '-60px' })
-  const rightInView = useInView(rightRef, { once: true, margin: '-60px' })
-  const headlineInView = useInView(sectionRef, { once: true, margin: '-60px' })
-  const statsInView = useInView(statsRef, { once: true, margin: '-40px' })
+  const leftInView = useInView(leftRef, { once: false, margin: '-60px' })
+  const rightInView = useInView(rightRef, { once: false, margin: '-60px' })
+  const headlineInView = useInView(sectionRef, { once: false, margin: '-60px' })
+  const statsInView = useInView(statsRef, { once: false, margin: '-40px' })
 
   return (
     <section id="about" ref={sectionRef} className="bg-sand py-24 md:py-32">

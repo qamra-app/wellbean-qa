@@ -10,7 +10,7 @@ const navLinks = ['About', 'Visit', 'Contact']
 
 export default function Footer() {
   const ref = useRef<HTMLElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
+  const inView = useInView(ref, { once: false, margin: '-60px' })
 
   return (
     <footer ref={ref} className="bg-espresso text-cream">
