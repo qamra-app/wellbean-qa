@@ -76,7 +76,9 @@ export default function Footer() {
                 @wellbean.qa
               </a>
               <a
-                href="#"
+                href="https://wa.me/97400000000"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-3 font-sans text-sm font-medium text-white hover:text-cream/70 transition-colors py-1.5"
               >
                 <WhatsappLogo size={18} />

@@ -42,3 +42,22 @@ export const fadeIn: Variants = {
     transition: { duration: 0.5, ease: 'easeOut' },
   },
 }
+
+export const slideRight: Variants = {
+  hidden: { opacity: 0, x: 32, filter: 'blur(6px)' },
+  visible: {
+    opacity: 1,
+    x: 0,
+    filter: 'blur(0px)',
+    transition: { type: 'spring', stiffness: 120, damping: 20 },
+  },
+}
+
+export const floatUp: Variants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { type: 'spring', stiffness: 80, damping: 16, mass: 0.6 },
+  },
+}

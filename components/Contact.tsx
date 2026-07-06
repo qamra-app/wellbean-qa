@@ -15,7 +15,7 @@ interface Channel {
   icon: React.ReactNode
   name: string
   handle: string
-  href?: string
+  href: string
 }
 
 const channels: Channel[] = [
@@ -29,6 +29,7 @@ const channels: Channel[] = [
     icon: <WhatsappLogo size={18} className="text-espresso group-hover:text-cream transition-colors duration-300" />,
     name: 'WhatsApp',
     handle: 'Chat with us directly',
+    href: 'https://wa.me/97400000000',
   },
   {
     icon: <EnvelopeSimple size={18} className="text-espresso group-hover:text-cream transition-colors duration-300" />,
@@ -51,11 +52,20 @@ export default function Contact() {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
+    const form = e.currentTarget
+    const name = (form.elements.namedItem('name') as HTMLInputElement).value
+    const email = (form.elements.namedItem('email') as HTMLInputElement).value
+    const message = (form.elements.namedItem('message') as HTMLTextAreaElement).value
+
+    const subject = encodeURIComponent(`WellBean launch notification — ${name}`)
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`)
+    window.open(`mailto:hello@wellbean.qa?subject=${subject}&body=${body}`)
     setSubmitted(true)
   }
 
   return (
     <section
+      id="contact"
       ref={sectionRef}
       className="bg-clay py-24 md:py-32 px-6 md:px-12"
     >
@@ -82,48 +92,48 @@ export default function Contact() {
           initial="hidden"
           animate={leftInView ? 'visible' : 'hidden'}
         >
-          {/* Headline */}
           <h2
             className="font-display font-bold leading-[1.05] tracking-tight text-espresso"
             style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)' }}
           >
-            {"Let's talk"}
+            Be the first
             <br />
-            coffee.
+            to know.
           </h2>
 
-          {/* Subtext */}
           <p className="mt-6 font-sans text-base text-charcoal/60 max-w-[38ch] leading-relaxed">
-            Got questions about our opening, want to collaborate, or just want to say hello?
-            We&apos;re all ears.
+            We&apos;re putting the finishing touches on WellBean. Drop us a line and you&apos;ll
+            hear from us the moment we open our doors in Doha.
           </p>
 
           {/* Contact channels */}
-          <div className="mt-12 space-y-4">
-            {channels.map((channel) => {
-              const inner = (
-                <div className="group flex items-center gap-4 py-4 border-b border-charcoal/[0.08] cursor-pointer">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            animate={leftInView ? 'visible' : 'hidden'}
+            className="mt-12 space-y-4"
+          >
+            {channels.map((channel) => (
+              <motion.a
+                key={channel.name}
+                href={channel.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                variants={fadeUp}
+                className="block group"
+              >
+                <div className="flex items-center gap-4 py-4 border-b border-charcoal/[0.08]">
                   <div className="w-10 h-10 rounded-full bg-espresso/[0.06] flex items-center justify-center group-hover:bg-espresso transition-colors duration-300 shrink-0">
                     {channel.icon}
                   </div>
                   <div className="flex flex-col">
-                    <span className="font-display font-semibold text-sm text-charcoal">
-                      {channel.name}
-                    </span>
+                    <span className="font-display font-semibold text-sm text-charcoal">{channel.name}</span>
                     <span className="font-sans text-xs text-charcoal/40">{channel.handle}</span>
                   </div>
                 </div>
-              )
-
-              return channel.href ? (
-                <a key={channel.name} href={channel.href} target="_blank" rel="noopener noreferrer" className="block">
-                  {inner}
-                </a>
-              ) : (
-                <div key={channel.name}>{inner}</div>
-              )
-            })}
-          </div>
+              </motion.a>
+            ))}
+          </motion.div>
         </motion.div>
 
         {/* RIGHT COLUMN — contact form */}
@@ -143,12 +153,14 @@ export default function Contact() {
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.25, ease: 'easeIn' }}
               >
-                {/* Name */}
+                <p className="font-display font-bold text-lg text-espresso mb-6">Join the launch list</p>
+
                 <div className="mb-6">
                   <label className="block font-sans text-xs uppercase tracking-[0.15em] text-charcoal/40 mb-3">
                     Name
                   </label>
                   <input
+                    name="name"
                     type="text"
                     placeholder="Your name"
                     required
@@ -156,12 +168,12 @@ export default function Contact() {
                   />
                 </div>
 
-                {/* Email */}
                 <div className="mb-6">
                   <label className="block font-sans text-xs uppercase tracking-[0.15em] text-charcoal/40 mb-3">
                     Email
                   </label>
                   <input
+                    name="email"
                     type="email"
                     placeholder="your@email.com"
                     required
@@ -169,25 +181,23 @@ export default function Contact() {
                   />
                 </div>
 
-                {/* Message */}
                 <div className="mb-6">
                   <label className="block font-sans text-xs uppercase tracking-[0.15em] text-charcoal/40 mb-3">
-                    Message
+                    Message <span className="normal-case tracking-normal text-charcoal/25">(optional)</span>
                   </label>
                   <textarea
+                    name="message"
                     rows={4}
-                    placeholder="What's on your mind?"
-                    required
+                    placeholder="Anything you'd like us to know?"
                     className="w-full bg-cream/50 rounded-xl px-4 py-3.5 font-sans text-sm text-charcoal placeholder:text-charcoal/25 border border-transparent focus:border-espresso/20 focus:bg-cream focus:outline-none transition-all duration-200 resize-none"
                   />
                 </div>
 
-                {/* Submit */}
                 <button
                   type="submit"
                   className="group w-full mt-2 rounded-xl bg-espresso text-cream font-display font-bold text-sm py-4 px-8 flex items-center justify-center gap-3 hover:bg-brown transition-colors duration-300 active:scale-[0.98]"
                 >
-                  Send Message
+                  Notify me when you open
                   <ArrowRight
                     size={16}
                     className="group-hover:translate-x-1 transition-transform duration-200"
@@ -202,14 +212,10 @@ export default function Contact() {
                 animate="visible"
                 className="flex flex-col items-center justify-center py-16 text-center"
               >
-                <CheckCircle
-                  size={48}
-                  weight="fill"
-                  className="text-espresso mb-4"
-                />
-                <p className="font-display font-bold text-xl text-espresso">Message Sent!</p>
+                <CheckCircle size={48} weight="fill" className="text-espresso mb-4" />
+                <p className="font-display font-bold text-xl text-espresso">You&apos;re on the list!</p>
                 <p className="font-sans text-sm text-charcoal/50 mt-2">
-                  We&apos;ll get back to you soon.
+                  We&apos;ll reach out the moment WellBean opens in Doha.
                 </p>
               </motion.div>
             )}

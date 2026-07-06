@@ -1,10 +1,9 @@
 'use client'
 
-import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { useRef, useEffect } from 'react'
+import { motion, useInView, useMotionValue, useTransform, animate } from 'framer-motion'
 import Image from 'next/image'
-import { ArrowUpRight } from '@phosphor-icons/react'
-import { slideInLeft, scaleIn } from '@/lib/animations'
+import { slideInLeft, scaleIn, staggerContainer, floatUp } from '@/lib/animations'
 
 const headlineLines = ["We're your", 'daily ritual.']
 
@@ -21,32 +20,57 @@ const lineReveal = {
   }),
 }
 
+const stats = [
+  { target: 2026, suffix: '', label: 'Est.' },
+  { target: 87, suffix: '+', label: 'SCA Cup Score' },
+  { target: 100, suffix: '%', label: 'Single Origin' },
+]
+
+function Counter({ target, suffix = '' }: { target: number; suffix?: string }) {
+  const ref = useRef<HTMLSpanElement>(null)
+  const count = useMotionValue(0)
+  const rounded = useTransform(count, (v: number) => Math.floor(v))
+  const inView = useInView(ref, { once: true, margin: '-40px' })
+
+  useEffect(() => {
+    if (!inView) return
+    const controls = animate(count, target, {
+      duration: 1.6,
+      ease: [0.16, 1, 0.3, 1],
+    })
+    return () => controls.stop()
+  }, [inView, count, target])
+
+  return (
+    <span ref={ref}>
+      <motion.span>{rounded}</motion.span>{suffix}
+    </span>
+  )
+}
+
 export default function About() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const leftRef = useRef<HTMLDivElement>(null)
   const rightRef = useRef<HTMLDivElement>(null)
+  const statsRef = useRef<HTMLDivElement>(null)
 
   const leftInView = useInView(leftRef, { once: true, margin: '-60px' })
   const rightInView = useInView(rightRef, { once: true, margin: '-60px' })
   const headlineInView = useInView(sectionRef, { once: true, margin: '-60px' })
+  const statsInView = useInView(statsRef, { once: true, margin: '-40px' })
 
   return (
-    <section
-      id="about"
-      ref={sectionRef}
-      className="bg-sand py-24 md:py-32"
-    >
+    <section id="about" ref={sectionRef} className="bg-sand py-24 md:py-32">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         {/* Section header */}
         <div className="flex items-center gap-6 mb-20">
-          <span className="font-sans text-xs uppercase tracking-[0.2em] text-charcoal/30">
-            About
-          </span>
+          <span className="font-sans text-xs uppercase tracking-[0.2em] text-charcoal/30">About</span>
           <div className="flex-1 h-px bg-charcoal/10" />
         </div>
 
         {/* Main grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+
           {/* Left column */}
           <motion.div
             ref={leftRef}
@@ -54,7 +78,7 @@ export default function About() {
             initial="hidden"
             animate={leftInView ? 'visible' : 'hidden'}
           >
-            {/* Headline with per-line slide-up */}
+            {/* Headline */}
             <div>
               {headlineLines.map((line, i) => (
                 <div key={line} className="overflow-hidden">
@@ -74,31 +98,34 @@ export default function About() {
 
             {/* Body copy */}
             <p className="mt-8 font-sans text-base leading-[1.8] text-charcoal/65 max-w-[44ch]">
-              WellBean is more than coffee. It&apos;s the first sip of a good morning,
-              the pause in a busy afternoon, the ritual that grounds your day.
+              WellBean brings specialty-grade coffee to Doha — single-origin beans sourced
+              from Ethiopia&apos;s Yirgacheffe highlands and Yemen&apos;s ancient Haraz mountains,
+              roasted in small batches to highlight every terroir note.
             </p>
             <p className="mt-4 font-sans text-base leading-[1.8] text-charcoal/65 max-w-[44ch]">
-              We source specialty-grade beans from single origins, roast them
-              to peak expression, and brew them with the care they deserve.
+              We&apos;re building a home for the discerning cup: espresso bar, pour-over station,
+              and filter program for those who know the difference — and those ready to find out.
             </p>
 
-            {/* Stats row */}
-            <div className="mt-12 grid grid-cols-3 gap-6 border-t border-charcoal/10 pt-8">
-              {[
-                { number: '2026', label: 'Founded' },
-                { number: '87+', label: 'Cup Score' },
-                { number: 'QA', label: 'Home' },
-              ].map((stat) => (
-                <div key={stat.label}>
+            {/* Animated stats */}
+            <motion.div
+              ref={statsRef}
+              variants={staggerContainer}
+              initial="hidden"
+              animate={statsInView ? 'visible' : 'hidden'}
+              className="mt-12 grid grid-cols-3 gap-6 border-t border-charcoal/10 pt-8"
+            >
+              {stats.map((stat) => (
+                <motion.div key={stat.label} variants={floatUp}>
                   <p className="font-display font-bold text-4xl text-espresso">
-                    {stat.number}
+                    <Counter target={stat.target} suffix={stat.suffix} />
                   </p>
                   <p className="font-sans text-xs text-charcoal/40 uppercase tracking-wider mt-1">
                     {stat.label}
                   </p>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </motion.div>
 
           {/* Right column — image */}
@@ -118,12 +145,11 @@ export default function About() {
               />
             </div>
             <div className="mt-4 flex items-center justify-between">
-              <span className="font-sans text-xs text-charcoal/40">
-                Single origin. Always.
-              </span>
-              <ArrowUpRight size={16} className="text-charcoal/30" />
+              <span className="font-sans text-xs text-charcoal/40">Single origin. Always.</span>
+              <span className="font-sans text-xs text-charcoal/25 uppercase tracking-widest">Est. 2026</span>
             </div>
           </motion.div>
+
         </div>
       </div>
     </section>
