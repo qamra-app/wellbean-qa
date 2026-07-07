@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Syne, DM_Sans } from 'next/font/google'
 import './globals.css'
 
@@ -12,6 +12,14 @@ const dmSans = DM_Sans({
   subsets: ['latin'],
   variable: '--font-dm-sans',
 })
+
+// maximumScale stops iOS Safari's automatic focus/legacy zoom from rescaling
+// the page; user-initiated pinch zoom still works (iOS ignores it for that).
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+}
 
 export const metadata: Metadata = {
   title: 'WellBean | Specialty Coffee',

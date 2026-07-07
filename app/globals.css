@@ -17,6 +17,17 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Full-height hero with fallback: older iOS Safari (<16.4) has no dvh
+   support, which left the hero without a min-height there. */
+.hero-vh {
+  min-height: 100vh;
+}
+@supports (min-height: 100dvh) {
+  .hero-vh {
+    min-height: 100dvh;
+  }
+}
+
 body {
   background-color: #FAFAF9;
   color: #1A1A1A;

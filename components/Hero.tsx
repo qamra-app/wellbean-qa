@@ -151,7 +151,7 @@ export default function Hero() {
 
   return (
     <motion.section
-      className="grain-overlay relative min-h-[100dvh] overflow-hidden bg-espresso flex flex-col"
+      className="grain-overlay relative hero-vh overflow-hidden bg-espresso flex flex-col"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
@@ -206,7 +206,7 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-[100dvh] text-center px-6 w-full">
+      <div className="relative z-10 flex flex-col items-center justify-center hero-vh text-center px-6 w-full">
         {/* Steam effect — medium depth layer */}
         <motion.div className="hidden md:block" style={{ x: logoX, y: logoY }}>
           <SteamEffect />
