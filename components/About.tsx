@@ -3,7 +3,7 @@
 import { useRef, useEffect } from 'react'
 import { motion, useInView, useMotionValue, useTransform, animate } from 'framer-motion'
 import Image from 'next/image'
-import { slideInLeft, scaleIn, staggerContainer, floatUp } from '@/lib/animations'
+import { slideInLeft, scaleIn, staggerContainer, floatUp, useReveal } from '@/lib/animations'
 
 const headlineLines = ["We're your", 'daily ritual.']
 
@@ -28,12 +28,19 @@ const stats = [
 
 function Counter({ target, suffix = '' }: { target: number; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null)
-  const count = useMotionValue(0)
+  // Starts at the final value so static HTML shows real numbers without JS;
+  // reset to 0 right before the first count-up.
+  const count = useMotionValue(target)
   const rounded = useTransform(count, (v: number) => Math.floor(v))
   const inView = useInView(ref, { once: false, margin: '-40px' })
+  const started = useRef(false)
 
   useEffect(() => {
     if (!inView) return
+    if (!started.current) {
+      started.current = true
+      count.set(0)
+    }
     const controls = animate(count, target, {
       duration: 1.6,
       ease: [0.16, 1, 0.3, 1],
@@ -54,10 +61,10 @@ export default function About() {
   const rightRef = useRef<HTMLDivElement>(null)
   const statsRef = useRef<HTMLDivElement>(null)
 
-  const leftInView = useInView(leftRef, { once: false, margin: '-60px' })
-  const rightInView = useInView(rightRef, { once: false, margin: '-60px' })
-  const headlineInView = useInView(sectionRef, { once: false, margin: '-60px' })
-  const statsInView = useInView(statsRef, { once: false, margin: '-40px' })
+  const leftControls = useReveal(leftRef, { once: false, margin: '-60px' })
+  const rightControls = useReveal(rightRef, { once: false, margin: '-60px' })
+  const headlineControls = useReveal(sectionRef, { once: false, margin: '-60px' })
+  const statsControls = useReveal(statsRef, { once: false, margin: '-40px' })
 
   return (
     <section id="about" ref={sectionRef} className="bg-sand py-24 md:py-32">
@@ -75,8 +82,8 @@ export default function About() {
           <motion.div
             ref={leftRef}
             variants={slideInLeft}
-            initial="hidden"
-            animate={leftInView ? 'visible' : 'hidden'}
+            initial="visible"
+            animate={leftControls}
           >
             {/* Headline */}
             <div>
@@ -85,8 +92,8 @@ export default function About() {
                   <motion.h2
                     custom={i}
                     variants={lineReveal}
-                    initial="hidden"
-                    animate={headlineInView ? 'visible' : 'hidden'}
+                    initial="visible"
+                    animate={headlineControls}
                     className="font-display font-bold text-espresso leading-[1.05] tracking-tight"
                     style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)' }}
                   >
@@ -111,8 +118,8 @@ export default function About() {
             <motion.div
               ref={statsRef}
               variants={staggerContainer}
-              initial="hidden"
-              animate={statsInView ? 'visible' : 'hidden'}
+              initial="visible"
+              animate={statsControls}
               className="mt-12 grid grid-cols-3 gap-6 border-t border-charcoal/10 pt-8"
             >
               {stats.map((stat) => (
@@ -132,8 +139,8 @@ export default function About() {
           <motion.div
             ref={rightRef}
             variants={scaleIn}
-            initial="hidden"
-            animate={rightInView ? 'visible' : 'hidden'}
+            initial="visible"
+            animate={rightControls}
           >
             <div className="relative aspect-[3/4] rounded-2xl overflow-hidden">
               <Image

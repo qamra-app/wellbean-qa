@@ -3,7 +3,7 @@
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import Image from 'next/image'
 import { ArrowRight } from '@phosphor-icons/react'
-import { staggerContainer, fadeUp } from '@/lib/animations'
+import { staggerContainer, fadeUp, useEntrance } from '@/lib/animations'
 
 function SteamEffect() {
   return (
@@ -123,6 +123,7 @@ const tickerItems = [
 ]
 
 export default function Hero() {
+  const entrance = useEntrance()
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
 
@@ -219,8 +220,8 @@ export default function Hero() {
           {/* Eyebrow tag */}
           <motion.div
             variants={fadeUp}
-            initial="hidden"
-            animate="visible"
+            initial="visible"
+            animate={entrance}
             className="inline-flex items-center gap-2 rounded-full border border-cream/20 px-4 py-1.5 mb-8"
           >
             <span className="animate-pulse w-1.5 h-1.5 rounded-full bg-brown block" />
@@ -236,8 +237,8 @@ export default function Hero() {
                 <motion.h1
                   custom={i}
                   variants={wordReveal}
-                  initial="hidden"
-                  animate="visible"
+                  initial="visible"
+                  animate={entrance}
                   className="font-display font-bold text-white leading-[0.9] tracking-tight"
                   style={{ fontSize: 'clamp(4rem, 14vw, 12rem)' }}
                 >
@@ -250,8 +251,8 @@ export default function Hero() {
           {/* Tagline */}
           <motion.p
             variants={fadeUp}
-            initial="hidden"
-            animate="visible"
+            initial="visible"
+            animate={entrance}
             transition={{ delay: 0.75 }}
             className="font-sans text-white/80 text-lg md:text-xl font-light tracking-wide mt-8"
           >
@@ -261,8 +262,8 @@ export default function Hero() {
           {/* Opening line — bumped up for legibility */}
           <motion.p
             variants={fadeUp}
-            initial="hidden"
-            animate="visible"
+            initial="visible"
+            animate={entrance}
             transition={{ delay: 0.88 }}
             className="font-sans text-white/45 text-sm tracking-wide mt-2"
           >
@@ -272,8 +273,8 @@ export default function Hero() {
           {/* Mini ticker */}
           <motion.div
             variants={fadeUp}
-            initial="hidden"
-            animate="visible"
+            initial="visible"
+            animate={entrance}
             transition={{ delay: 1.0 }}
             className="overflow-hidden w-full max-w-xs mt-6"
           >
@@ -281,7 +282,7 @@ export default function Hero() {
               {[0, 1].map((rep) => (
                 <div key={rep} className="flex shrink-0">
                   {tickerItems.map((item) => (
-                    <span key={`${rep}-${item}`} className="font-sans text-[9px] uppercase tracking-[0.2em] text-white/30 px-3">
+                    <span key={`${rep}-${item}`} className="font-sans text-[10px] uppercase tracking-[0.2em] text-white/30 px-3">
                       {item} <span className="text-white/15">·</span>
                     </span>
                   ))}
@@ -293,8 +294,8 @@ export default function Hero() {
           {/* CTA row */}
           <motion.div
             variants={staggerContainer}
-            initial="hidden"
-            animate="visible"
+            initial="visible"
+            animate={entrance}
             className="flex items-center gap-4 mt-8"
           >
             <MagneticCTA />
@@ -315,9 +316,9 @@ export default function Hero() {
       <div className="absolute bottom-0 left-0 right-0 z-10 border-t border-cream/10">
         <div className="grid grid-cols-3 divide-x divide-cream/10">
           {stats.map((stat) => (
-            <div key={stat.label} className="py-5 px-8 flex flex-col gap-1">
-              <span className="font-display font-semibold text-white text-sm">{stat.label}</span>
-              <span className="font-sans text-white/65 text-xs">{stat.value}</span>
+            <div key={stat.label} className="py-4 px-3 md:py-5 md:px-8 flex flex-col gap-1">
+              <span className="font-display font-semibold text-white text-[13px] md:text-sm">{stat.label}</span>
+              <span className="font-sans text-white/65 text-[11px] md:text-xs">{stat.value}</span>
             </div>
           ))}
         </div>

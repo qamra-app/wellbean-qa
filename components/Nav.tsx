@@ -130,7 +130,7 @@ export default function Nav() {
                   href={`#${link.toLowerCase()}`}
                   variants={fadeUp}
                   onClick={() => setMenuOpen(false)}
-                  className="font-display text-3xl font-bold text-espresso hover:text-brown transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                  className="font-display text-3xl font-bold text-espresso hover:text-brown transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] py-1"
                 >
                   {link}
                 </motion.a>

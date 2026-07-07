@@ -2,8 +2,8 @@
 
 import { useRef } from 'react'
 import Image from 'next/image'
-import { motion, useInView } from 'framer-motion'
-import { staggerContainer, slideRight, scaleIn } from '@/lib/animations'
+import { motion } from 'framer-motion'
+import { staggerContainer, slideRight, scaleIn, headerReveal, useReveal } from '@/lib/animations'
 
 const hoursData = [
   { day: 'Sun – Thu', time: '—' },
@@ -29,9 +29,9 @@ export default function Hours() {
   const leftRef = useRef<HTMLDivElement>(null)
   const rightRef = useRef<HTMLDivElement>(null)
 
-  const sectionInView = useInView(sectionRef, { once: false, margin: '-60px' })
-  const leftInView = useInView(leftRef, { once: false, margin: '-60px' })
-  const rightInView = useInView(rightRef, { once: false, margin: '-60px' })
+  const sectionControls = useReveal(sectionRef, { once: false, margin: '-60px' })
+  const leftControls = useReveal(leftRef, { once: false, margin: '-60px' })
+  const rightControls = useReveal(rightRef, { once: false, margin: '-60px' })
 
   return (
     <section
@@ -58,9 +58,9 @@ export default function Hours() {
         {/* Section header */}
         <motion.div
           className="max-w-7xl mx-auto flex items-center gap-6 mb-20"
-          initial={{ opacity: 0, y: 12 }}
-          animate={sectionInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
-          transition={{ duration: 0.5, ease: 'easeOut' }}
+          variants={headerReveal}
+          initial="visible"
+          animate={sectionControls}
         >
           <span className="font-sans text-xs uppercase tracking-[0.2em] text-charcoal/30 whitespace-nowrap">
             Visit
@@ -75,8 +75,8 @@ export default function Hours() {
           <motion.div
             ref={leftRef}
             variants={staggerContainer}
-            initial="hidden"
-            animate={leftInView ? 'visible' : 'hidden'}
+            initial="visible"
+            animate={leftControls}
           >
             {/* Headline */}
             <div>
@@ -147,8 +147,8 @@ export default function Hours() {
           <motion.div
             ref={rightRef}
             variants={scaleIn}
-            initial="hidden"
-            animate={rightInView ? 'visible' : 'hidden'}
+            initial="visible"
+            animate={rightControls}
             className="relative rounded-3xl overflow-hidden aspect-[4/5]"
           >
             <Image

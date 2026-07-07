@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, useState } from 'react'
-import { motion, useInView, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import {
   InstagramLogo,
   WhatsappLogo,
@@ -9,7 +9,7 @@ import {
   ArrowRight,
   CheckCircle,
 } from '@phosphor-icons/react'
-import { fadeUp, staggerContainer, slideInLeft, scaleIn } from '@/lib/animations'
+import { fadeUp, staggerContainer, slideInLeft, scaleIn, headerReveal, useReveal } from '@/lib/animations'
 
 interface Channel {
   icon: React.ReactNode
@@ -46,9 +46,9 @@ export default function Contact() {
   const leftRef = useRef<HTMLDivElement>(null)
   const rightRef = useRef<HTMLDivElement>(null)
 
-  const sectionInView = useInView(sectionRef, { once: false, margin: '-60px' })
-  const leftInView = useInView(leftRef, { once: false, margin: '-60px' })
-  const rightInView = useInView(rightRef, { once: false, margin: '-60px' })
+  const sectionControls = useReveal(sectionRef, { once: false, margin: '-60px' })
+  const leftControls = useReveal(leftRef, { once: false, margin: '-60px' })
+  const rightControls = useReveal(rightRef, { once: false, margin: '-60px' })
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -72,9 +72,9 @@ export default function Contact() {
       {/* Section header */}
       <motion.div
         className="max-w-7xl mx-auto flex items-center gap-6 mb-20"
-        initial={{ opacity: 0, y: 12 }}
-        animate={sectionInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
-        transition={{ duration: 0.5, ease: 'easeOut' }}
+        variants={headerReveal}
+        initial="visible"
+        animate={sectionControls}
       >
         <span className="font-sans text-xs uppercase tracking-[0.2em] text-charcoal/30 whitespace-nowrap">
           Contact
@@ -89,8 +89,8 @@ export default function Contact() {
         <motion.div
           ref={leftRef}
           variants={slideInLeft}
-          initial="hidden"
-          animate={leftInView ? 'visible' : 'hidden'}
+          initial="visible"
+          animate={leftControls}
         >
           <h2
             className="font-display font-bold leading-[1.05] tracking-tight text-espresso"
@@ -109,8 +109,8 @@ export default function Contact() {
           {/* Contact channels */}
           <motion.div
             variants={staggerContainer}
-            initial="hidden"
-            animate={leftInView ? 'visible' : 'hidden'}
+            initial="visible"
+            animate={leftControls}
             className="mt-12 space-y-4"
           >
             {channels.map((channel) => (
@@ -140,8 +140,8 @@ export default function Contact() {
         <motion.div
           ref={rightRef}
           variants={fadeUp}
-          initial="hidden"
-          animate={rightInView ? 'visible' : 'hidden'}
+          initial="visible"
+          animate={rightControls}
           className="bg-white rounded-3xl p-8 md:p-10 shadow-[0_2px_40px_-8px_rgba(28,10,2,0.08)]"
         >
           <AnimatePresence mode="wait">
@@ -164,7 +164,7 @@ export default function Contact() {
                     type="text"
                     placeholder="Your name"
                     required
-                    className="w-full bg-cream/50 rounded-xl px-4 py-3.5 font-sans text-sm text-charcoal placeholder:text-charcoal/25 border border-transparent focus:border-espresso/20 focus:bg-cream focus:outline-none transition-all duration-200"
+                    className="w-full bg-cream/50 rounded-xl px-4 py-3.5 font-sans text-base md:text-sm text-charcoal placeholder:text-charcoal/25 border border-transparent focus:border-espresso/20 focus:bg-cream focus:outline-none transition-all duration-200"
                   />
                 </div>
 
@@ -177,7 +177,7 @@ export default function Contact() {
                     type="email"
                     placeholder="your@email.com"
                     required
-                    className="w-full bg-cream/50 rounded-xl px-4 py-3.5 font-sans text-sm text-charcoal placeholder:text-charcoal/25 border border-transparent focus:border-espresso/20 focus:bg-cream focus:outline-none transition-all duration-200"
+                    className="w-full bg-cream/50 rounded-xl px-4 py-3.5 font-sans text-base md:text-sm text-charcoal placeholder:text-charcoal/25 border border-transparent focus:border-espresso/20 focus:bg-cream focus:outline-none transition-all duration-200"
                   />
                 </div>
 
@@ -189,13 +189,13 @@ export default function Contact() {
                     name="message"
                     rows={4}
                     placeholder="Anything you'd like us to know?"
-                    className="w-full bg-cream/50 rounded-xl px-4 py-3.5 font-sans text-sm text-charcoal placeholder:text-charcoal/25 border border-transparent focus:border-espresso/20 focus:bg-cream focus:outline-none transition-all duration-200 resize-none"
+                    className="w-full bg-cream/50 rounded-xl px-4 py-3.5 font-sans text-base md:text-sm text-charcoal placeholder:text-charcoal/25 border border-transparent focus:border-espresso/20 focus:bg-cream focus:outline-none transition-all duration-200 resize-none"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="group w-full mt-2 rounded-xl bg-espresso text-cream font-display font-bold text-sm py-4 px-8 flex items-center justify-center gap-3 hover:bg-brown transition-colors duration-300 active:scale-[0.98]"
+                  className="group w-full mt-2 rounded-xl bg-espresso text-cream font-display font-bold text-sm py-4 px-4 md:px-8 flex items-center justify-center gap-2 md:gap-3 whitespace-nowrap hover:bg-brown transition-colors duration-300 active:scale-[0.98]"
                 >
                   Notify me when you open
                   <ArrowRight

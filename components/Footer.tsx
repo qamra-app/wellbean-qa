@@ -1,24 +1,24 @@
 'use client'
 
 import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { InstagramLogo, WhatsappLogo } from '@phosphor-icons/react'
 import Image from 'next/image'
-import { fadeUp, staggerContainer } from '@/lib/animations'
+import { fadeUp, staggerContainer, useReveal } from '@/lib/animations'
 
 const navLinks = ['About', 'Visit', 'Contact']
 
 export default function Footer() {
   const ref = useRef<HTMLElement>(null)
-  const inView = useInView(ref, { once: false, margin: '-60px' })
+  const controls = useReveal(ref, { once: false, margin: '-60px' })
 
   return (
     <footer ref={ref} className="bg-espresso text-cream">
       {/* Top section */}
       <motion.div
         variants={staggerContainer}
-        initial="hidden"
-        animate={inView ? 'visible' : 'hidden'}
+        initial="visible"
+        animate={controls}
         className="max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-20"
       >
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
@@ -52,7 +52,7 @@ export default function Footer() {
                 <a
                   key={link}
                   href={`#${link.toLowerCase()}`}
-                  className="block font-sans text-sm font-medium text-white hover:text-cream/70 transition-colors py-1.5"
+                  className="block font-sans text-sm font-medium text-white hover:text-cream/70 transition-colors py-2.5 md:py-1.5"
                 >
                   {link}
                 </a>
@@ -70,7 +70,7 @@ export default function Footer() {
                 href="https://instagram.com/wellbean.qa"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 font-sans text-sm font-medium text-white hover:text-cream/70 transition-colors py-1.5"
+                className="flex items-center gap-3 font-sans text-sm font-medium text-white hover:text-cream/70 transition-colors py-2.5 md:py-1.5"
               >
                 <InstagramLogo size={18} />
                 @wellbean.qa
@@ -79,7 +79,7 @@ export default function Footer() {
                 href="https://wa.me/97400000000"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 font-sans text-sm font-medium text-white hover:text-cream/70 transition-colors py-1.5"
+                className="flex items-center gap-3 font-sans text-sm font-medium text-white hover:text-cream/70 transition-colors py-2.5 md:py-1.5"
               >
                 <WhatsappLogo size={18} />
                 Chat with us
