@@ -126,10 +126,13 @@ const tickerItems = [
 export default function Hero() {
   const entrance = useEntrance()
   const prefersReduced = useReducedMotion()
-  // Skip Ken Burns on mobile (no mouse, small screen) — avoids the zoomed
-  // background in the static HTML being visible on slow connections.
   const [isMobile, setIsMobile] = useState(true)
   useEffect(() => { setIsMobile(window.innerWidth < 768) }, [])
+
+  // On mobile: skip the hide-then-reveal cycle entirely — content stays
+  // permanently at "visible". The snap-to-hidden flash and re-animation
+  // are what users perceive as "zoom in" on the hero on slow connections.
+  const heroAnimate = isMobile ? 'visible' : entrance
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
 
@@ -158,6 +161,7 @@ export default function Hero() {
   return (
     <motion.section
       className="grain-overlay relative hero-vh overflow-hidden bg-espresso flex flex-col"
+      style={{ minHeight: '100dvh' }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
@@ -165,8 +169,8 @@ export default function Hero() {
       <motion.div
         className="absolute inset-0 z-0"
         style={{ x: bgX, y: bgY }}
-        initial={{ scale: 1.06 }}
-        animate={{ scale: isMobile || prefersReduced ? 1.06 : 1.03 }}
+        initial={{ scale: isMobile ? 1.0 : 1.06 }}
+        animate={{ scale: isMobile || prefersReduced ? 1.0 : 1.03 }}
         transition={{ duration: 6, ease: [0.16, 1, 0.3, 1] }}
       >
         <Image
@@ -227,7 +231,7 @@ export default function Hero() {
           <motion.div
             variants={fadeUp}
             initial="visible"
-            animate={entrance}
+            animate={heroAnimate}
             className="inline-flex items-center gap-2 rounded-full border border-cream/20 px-4 py-1.5 mb-6 md:mb-8"
           >
             <span className="animate-pulse w-1.5 h-1.5 rounded-full bg-brown block" />
@@ -244,7 +248,7 @@ export default function Hero() {
                   custom={i}
                   variants={wordReveal}
                   initial="visible"
-                  animate={entrance}
+                  animate={heroAnimate}
                   className="font-display font-bold text-white leading-[0.9] tracking-tight"
                   style={{ fontSize: 'clamp(3.25rem, 14vw, 12rem)' }}
                 >
@@ -258,7 +262,7 @@ export default function Hero() {
           <motion.p
             variants={fadeUp}
             initial="visible"
-            animate={entrance}
+            animate={heroAnimate}
             transition={{ delay: 0.75 }}
             className="font-sans text-white/80 text-base md:text-xl font-light tracking-wide mt-6 md:mt-8"
           >
@@ -269,7 +273,7 @@ export default function Hero() {
           <motion.p
             variants={fadeUp}
             initial="visible"
-            animate={entrance}
+            animate={heroAnimate}
             transition={{ delay: 0.88 }}
             className="hidden sm:block font-sans text-white/45 text-sm tracking-wide mt-2"
           >
@@ -280,7 +284,7 @@ export default function Hero() {
           <motion.div
             variants={fadeUp}
             initial="visible"
-            animate={entrance}
+            animate={heroAnimate}
             transition={{ delay: 1.0 }}
             className="hidden sm:block overflow-hidden w-full max-w-xs mt-6"
           >
@@ -301,7 +305,7 @@ export default function Hero() {
           <motion.div
             variants={staggerContainer}
             initial="visible"
-            animate={entrance}
+            animate={heroAnimate}
             className="flex items-center gap-4 mt-6 md:mt-8"
           >
             <MagneticCTA />

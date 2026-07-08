@@ -42,7 +42,7 @@ export default function Nav() {
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12 h-16 flex items-center justify-between">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2.5">
+          <a href="#" className="flex items-center gap-2.5 py-3">
             <div className={`w-7 h-7 rounded-full overflow-hidden flex-shrink-0 transition-all duration-300 ${
               scrolled ? '' : 'ring-1 ring-cream/20'
             }`}>
