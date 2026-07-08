@@ -1,7 +1,8 @@
 'use client'
 
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import { motion, useMotionValue, useSpring, useTransform, useReducedMotion } from 'framer-motion'
 import Image from 'next/image'
+import { useEffect, useState } from 'react'
 import { ArrowRight } from '@phosphor-icons/react'
 import { staggerContainer, fadeUp, useEntrance } from '@/lib/animations'
 
@@ -124,6 +125,11 @@ const tickerItems = [
 
 export default function Hero() {
   const entrance = useEntrance()
+  const prefersReduced = useReducedMotion()
+  // Skip Ken Burns on mobile (no mouse, small screen) — avoids the zoomed
+  // background in the static HTML being visible on slow connections.
+  const [isMobile, setIsMobile] = useState(true)
+  useEffect(() => { setIsMobile(window.innerWidth < 768) }, [])
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
 
@@ -155,13 +161,13 @@ export default function Hero() {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Background image — Ken Burns zoom + parallax */}
+      {/* Background image — Ken Burns zoom + parallax (desktop only) */}
       <motion.div
         className="absolute inset-0 z-0"
         style={{ x: bgX, y: bgY }}
-        initial={{ scale: 1.18 }}
-        animate={{ scale: 1.06 }}
-        transition={{ duration: 5, ease: [0.16, 1, 0.3, 1] }}
+        initial={{ scale: 1.06 }}
+        animate={{ scale: isMobile || prefersReduced ? 1.06 : 1.03 }}
+        transition={{ duration: 6, ease: [0.16, 1, 0.3, 1] }}
       >
         <Image
           src="https://images.unsplash.com/photo-1459755486867-b55449bb39ff?w=1920&q=80"
@@ -205,8 +211,8 @@ export default function Hero() {
         <RotatingBadge />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center hero-vh text-center px-6 w-full">
+      {/* Content — pb-20 keeps CTA clear of the absolute stat strip */}
+      <div className="relative z-10 flex flex-col items-center justify-center hero-vh text-center px-6 pb-20 w-full">
         {/* Steam effect — medium depth layer */}
         <motion.div className="hidden md:block" style={{ x: logoX, y: logoY }}>
           <SteamEffect />
@@ -222,7 +228,7 @@ export default function Hero() {
             variants={fadeUp}
             initial="visible"
             animate={entrance}
-            className="inline-flex items-center gap-2 rounded-full border border-cream/20 px-4 py-1.5 mb-8"
+            className="inline-flex items-center gap-2 rounded-full border border-cream/20 px-4 py-1.5 mb-6 md:mb-8"
           >
             <span className="animate-pulse w-1.5 h-1.5 rounded-full bg-brown block" />
             <span className="font-sans text-[11px] uppercase tracking-[0.2em] text-white/75">
@@ -240,7 +246,7 @@ export default function Hero() {
                   initial="visible"
                   animate={entrance}
                   className="font-display font-bold text-white leading-[0.9] tracking-tight"
-                  style={{ fontSize: 'clamp(4rem, 14vw, 12rem)' }}
+                  style={{ fontSize: 'clamp(3.25rem, 14vw, 12rem)' }}
                 >
                   {word}
                 </motion.h1>
@@ -254,29 +260,29 @@ export default function Hero() {
             initial="visible"
             animate={entrance}
             transition={{ delay: 0.75 }}
-            className="font-sans text-white/80 text-lg md:text-xl font-light tracking-wide mt-8"
+            className="font-sans text-white/80 text-base md:text-xl font-light tracking-wide mt-6 md:mt-8"
           >
             Your daily dose of well-bean-ing
           </motion.p>
 
-          {/* Opening line — bumped up for legibility */}
+          {/* Opening line — hidden on very small screens to save space */}
           <motion.p
             variants={fadeUp}
             initial="visible"
             animate={entrance}
             transition={{ delay: 0.88 }}
-            className="font-sans text-white/45 text-sm tracking-wide mt-2"
+            className="hidden sm:block font-sans text-white/45 text-sm tracking-wide mt-2"
           >
             Doha has been waiting for this cup. So have we.
           </motion.p>
 
-          {/* Mini ticker */}
+          {/* Mini ticker — hidden on very small screens */}
           <motion.div
             variants={fadeUp}
             initial="visible"
             animate={entrance}
             transition={{ delay: 1.0 }}
-            className="overflow-hidden w-full max-w-xs mt-6"
+            className="hidden sm:block overflow-hidden w-full max-w-xs mt-6"
           >
             <div className="flex animate-marquee whitespace-nowrap">
               {[0, 1].map((rep) => (
@@ -296,7 +302,7 @@ export default function Hero() {
             variants={staggerContainer}
             initial="visible"
             animate={entrance}
-            className="flex items-center gap-4 mt-8"
+            className="flex items-center gap-4 mt-6 md:mt-8"
           >
             <MagneticCTA />
             <motion.a
