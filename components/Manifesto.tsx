@@ -55,16 +55,16 @@ export default function Manifesto() {
 
   return (
     <section ref={ref} className="bg-cream py-20 md:py-28 px-6 md:px-12">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center gap-8 md:gap-0">
+      <div className="max-w-7xl mx-auto flex flex-row items-center gap-5 md:gap-16">
 
-        {/* Text — full width on mobile, flex-1 on desktop */}
-        <div className="w-full md:flex-1 md:min-w-0 flex flex-col gap-1 md:gap-2">
+        {/* Text */}
+        <div className="flex-1 min-w-0 flex flex-col gap-1 md:gap-2">
           {lines.map((line, li) => (
             <p
               key={line}
               className="font-display font-bold text-espresso leading-[1.45] tracking-tight"
               style={{
-                fontSize: 'clamp(1.4rem, 6vw, 6rem)',
+                fontSize: 'clamp(1.05rem, 5vw, 6rem)',
                 overflow: 'visible',
               }}
             >
@@ -87,9 +87,9 @@ export default function Manifesto() {
           ))}
         </div>
 
-        {/* Cup — overflow-hidden scoped here only, won't affect text */}
-        <div className="flex-shrink-0 overflow-hidden self-center md:self-auto"
-          style={{ width: 'clamp(160px, 28vw, 340px)' }}>
+        {/* Cup */}
+        <div className="flex-shrink-0 overflow-hidden"
+          style={{ width: 'clamp(72px, 22vw, 320px)' }}>
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}

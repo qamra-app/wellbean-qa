@@ -180,6 +180,7 @@ export default function Hero() {
           unoptimized
           priority
           className="object-cover opacity-35"
+          style={{ filter: 'sepia(0.5) saturate(0.8) brightness(0.9)' }}
         />
       </motion.div>
 

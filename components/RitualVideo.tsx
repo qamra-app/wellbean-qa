@@ -10,7 +10,7 @@ export default function RitualVideo() {
   return (
     <section
       className="relative bg-espresso overflow-hidden"
-      style={{ minHeight: 'clamp(420px, 65vw, 760px)' }}
+      style={{ minHeight: 'clamp(300px, 42vw, 580px)' }}
     >
       {/* Video — full bleed, motion graphic treatment */}
       <div ref={ref} className="absolute inset-0">
@@ -37,8 +37,8 @@ export default function RitualVideo() {
       </div>
 
       {/* Text layer */}
-      <div className="relative z-10 flex flex-col justify-end h-full max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-24"
-        style={{ minHeight: 'clamp(420px, 65vw, 760px)' }}>
+      <div className="relative z-10 flex flex-col justify-end h-full max-w-7xl mx-auto px-6 md:px-12 py-10 md:py-16"
+        style={{ minHeight: 'clamp(300px, 42vw, 580px)' }}>
 
         <motion.div
           initial={{ opacity: 0, y: 32 }}
