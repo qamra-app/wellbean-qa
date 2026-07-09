@@ -161,7 +161,7 @@ export default function Hero() {
   return (
     <motion.section
       className="grain-overlay relative hero-vh overflow-hidden bg-espresso flex flex-col"
-      style={{ minHeight: '100dvh' }}
+      style={{ minHeight: '100vh' }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
@@ -236,7 +236,7 @@ export default function Hero() {
           >
             <span className="animate-pulse w-1.5 h-1.5 rounded-full bg-brown block" />
             <span className="font-sans text-[11px] uppercase tracking-[0.2em] text-white/75">
-              Specialty Coffee · Opening 2026 · Doha, Qatar
+              Specialty Coffee · Opening 2026 · Vendôme Mall, Lusail
             </span>
           </motion.div>
 
@@ -258,15 +258,31 @@ export default function Hero() {
             ))}
           </div>
 
-          {/* Tagline */}
+          {/* Tagline — script accent, echoes the physical hoarding */}
           <motion.p
             variants={fadeUp}
             initial="visible"
             animate={heroAnimate}
             transition={{ delay: 0.75 }}
-            className="font-sans text-white/80 text-base md:text-xl font-light tracking-wide mt-6 md:mt-8"
+            className="font-script text-white/80 text-4xl md:text-5xl mt-6 md:mt-8 leading-none"
           >
-            Your daily dose of well-bean-ing
+            Fill your cup{' '}
+            <svg
+              className="inline-block align-middle"
+              style={{ width: '0.7em', height: '0.7em', marginBottom: '0.1em' }}
+              viewBox="0 0 28 26"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                d="M14 23.5C13 22.5 2.5 16 2.5 8.5C2.5 5.1 5.1 2.5 8.5 2.5C11 2.5 13.1 4 14 6.2C14.9 4 17 2.5 19.5 2.5C22.9 2.5 25.5 5.1 25.5 8.5C25.5 16 15 22.5 14 23.5Z"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
           </motion.p>
 
           {/* Opening line — hidden on very small screens to save space */}
@@ -277,7 +293,7 @@ export default function Hero() {
             transition={{ delay: 0.88 }}
             className="hidden sm:block font-sans text-white/45 text-sm tracking-wide mt-2"
           >
-            Doha has been waiting for this cup. So have we.
+            Vendôme Mall is waiting for this cup. So are we.
           </motion.p>
 
           {/* Mini ticker — hidden on very small screens */}

@@ -105,13 +105,13 @@ export default function About() {
 
             {/* Body copy */}
             <p className="mt-8 font-sans text-base leading-[1.8] text-charcoal/65 max-w-[44ch]">
-              WellBean brings specialty-grade coffee to Doha — single-origin beans sourced
-              from Ethiopia&apos;s Yirgacheffe highlands and Yemen&apos;s ancient Haraz mountains,
-              roasted in small batches to highlight every terroir note.
+              WellBean brings specialty-grade coffee to Doha. Single-origin beans from
+              Ethiopia&apos;s Yirgacheffe highlands and Yemen&apos;s ancient Haraz mountains,
+              roasted in small batches to bring out every terroir note.
             </p>
             <p className="mt-4 font-sans text-base leading-[1.8] text-charcoal/65 max-w-[44ch]">
               We&apos;re building a home for the discerning cup: espresso bar, pour-over station,
-              and filter program for those who know the difference — and those ready to find out.
+              and filter program for those who know the difference, and those ready to discover it.
             </p>
 
             {/* Animated stats */}

@@ -103,7 +103,7 @@ export default function Contact() {
 
           <p className="mt-6 font-sans text-base text-charcoal/60 max-w-[38ch] leading-relaxed">
             We&apos;re putting the finishing touches on WellBean. Drop us a line and you&apos;ll
-            hear from us the moment we open our doors in Doha.
+            hear from us the moment we open our doors at Vendôme Mall.
           </p>
 
           {/* Contact channels */}
@@ -215,7 +215,7 @@ export default function Contact() {
                 <CheckCircle size={48} weight="fill" className="text-espresso mb-4" />
                 <p className="font-display font-bold text-xl text-espresso">You&apos;re on the list!</p>
                 <p className="font-sans text-sm text-charcoal/50 mt-2">
-                  We&apos;ll reach out the moment WellBean opens in Doha.
+                  We&apos;ll reach out the moment WellBean opens at Vendôme Mall.
                 </p>
               </motion.div>
             )}

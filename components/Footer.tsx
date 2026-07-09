@@ -37,8 +37,23 @@ export default function Footer() {
               <p className="font-display font-bold text-3xl text-cream">WellBean</p>
             </div>
             <p className="font-sans text-sm font-medium text-white/90 mt-1">Specialty Coffee</p>
-            <p className="font-sans text-cream/65 text-sm mt-6 max-w-[24ch] leading-relaxed italic">
-              &ldquo;Your daily dose of well-bean-ing.&rdquo;
+            <p className="font-script text-cream/65 text-3xl mt-6 leading-none flex items-center gap-1.5">
+              Fill your cup{' '}
+              <svg
+                style={{ width: '0.65em', height: '0.65em' }}
+                viewBox="0 0 28 26"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path
+                  d="M14 23.5C13 22.5 2.5 16 2.5 8.5C2.5 5.1 5.1 2.5 8.5 2.5C11 2.5 13.1 4 14 6.2C14.9 4 17 2.5 19.5 2.5C22.9 2.5 25.5 5.1 25.5 8.5C25.5 16 15 22.5 14 23.5Z"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
             </p>
           </motion.div>
 
@@ -97,7 +112,7 @@ export default function Footer() {
         <p className="font-sans text-xs text-cream/55">
           © 2026 WellBean. All rights reserved.
         </p>
-        <p className="font-sans text-xs text-cream/55">Doha, State of Qatar</p>
+        <p className="font-sans text-xs text-cream/55">Vendôme Mall · Lusail, Qatar</p>
       </div>
     </footer>
   )

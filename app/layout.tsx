@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Syne, DM_Sans } from 'next/font/google'
+import { Syne, DM_Sans, Great_Vibes } from 'next/font/google'
 import './globals.css'
 
 const syne = Syne({
@@ -11,6 +11,12 @@ const syne = Syne({
 const dmSans = DM_Sans({
   subsets: ['latin'],
   variable: '--font-dm-sans',
+})
+
+const greatVibes = Great_Vibes({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-great-vibes',
 })
 
 // maximumScale stops iOS Safari's automatic focus/legacy zoom from rescaling
@@ -32,7 +38,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${syne.variable} ${dmSans.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${syne.variable} ${dmSans.variable} ${greatVibes.variable}`} suppressHydrationWarning>
       <body>{children}</body>
     </html>
   )

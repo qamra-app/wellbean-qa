@@ -9,7 +9,7 @@ const hoursData = [
   { day: 'Sun – Thu', time: '—' },
 ]
 
-const tags = ['Specialty Coffee', 'Opening 2026', 'Qatar']
+const tags = ['Specialty Coffee', 'Opening 2026', 'Vendôme Mall']
 
 const marqueeItems = [
   'Single Origin',
@@ -21,7 +21,7 @@ const marqueeItems = [
   'Craft Roasted',
   'Traced to Source',
   'Opening 2026',
-  'Doha, Qatar',
+  'Vendôme Mall',
 ]
 
 export default function Hours() {
@@ -80,7 +80,7 @@ export default function Hours() {
           >
             {/* Headline */}
             <div>
-              {['Find us in', 'Doha.'].map((line) => (
+              {['Find us at', 'Vendôme Mall.'].map((line) => (
                 <div key={line} className="overflow-hidden">
                   <motion.div variants={slideRight}>
                     <h2
@@ -96,12 +96,12 @@ export default function Hours() {
 
             {/* One-liner */}
             <motion.p variants={slideRight} className="mt-6 font-sans text-base leading-[1.8] text-charcoal/55 max-w-[36ch]">
-              A quiet corner for the unhurried cup — coming soon to Doha.
+              A quiet corner for the unhurried cup. Coming soon to Vendôme Mall, Lusail.
             </motion.p>
 
             {/* Address block */}
             <motion.div variants={slideRight} className="mt-8 space-y-1">
-              <p className="font-sans text-sm text-charcoal/50">Doha, State of Qatar</p>
+              <p className="font-sans text-sm text-charcoal/50">Vendôme Mall, Lusail, Qatar</p>
               <p className="font-sans text-sm text-charcoal/50">@wellbean.qa</p>
               <p className="font-sans text-sm text-charcoal/50">wellbean.qa</p>
             </motion.div>
@@ -153,14 +153,14 @@ export default function Hours() {
           >
             <Image
               src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80"
-              alt="WellBean café in Doha"
+              alt="WellBean café at Vendôme Mall, Lusail"
               fill
               className="object-cover"
               unoptimized
             />
             <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-espresso/90 via-espresso/40 to-transparent">
               <p className="font-display font-bold text-xl text-cream">WellBean</p>
-              <p className="font-sans text-sm text-cream/60 mt-1">Doha, State of Qatar</p>
+              <p className="font-sans text-sm text-cream/60 mt-1">Vendôme Mall · Lusail, Qatar</p>
               <div className="flex flex-wrap gap-2 mt-4">
                 {tags.map((tag) => (
                   <span
