@@ -149,7 +149,6 @@ export default function About() {
                 fill
                 unoptimized
                 className="object-cover transition-all duration-700"
-                style={{ filter: 'sepia(0.55) saturate(0.7) brightness(0.9) hue-rotate(-10deg)' }}
               />
             </div>
             <div className="mt-4 flex items-center justify-between">

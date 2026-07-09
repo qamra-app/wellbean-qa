@@ -157,7 +157,6 @@ export default function Hours() {
               fill
               className="object-cover"
               unoptimized
-              style={{ filter: 'sepia(0.55) saturate(0.7) brightness(0.9) hue-rotate(-10deg)' }}
             />
             <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-espresso/90 via-espresso/40 to-transparent">
               <p className="font-display font-bold text-xl text-cream">WellBean</p>
